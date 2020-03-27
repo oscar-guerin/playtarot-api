@@ -1,10 +1,12 @@
 import * as admin from 'firebase-admin';
 import * as serviceAccount from '../service-account.json';
 import * as functions from 'firebase-functions';
+import { TriggerAnnotated } from 'firebase-functions';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import express, { Express } from 'express';
+import express from 'express';
+import e, { Express } from 'express';
 import { INestApplication } from '@nestjs/common';
 
 const params: any = {
@@ -30,13 +32,14 @@ const createNestServer: (expressInstance: Express) => Promise<INestApplication> 
 	const app: INestApplication = await NestFactory.create(
 		AppModule,
 		new ExpressAdapter(expressInstance),
+		{cors: true}
 	);
 
 	return app.init();
 };
 
 createNestServer(server)
-	.then((app: INestApplication) => console.log('Nest Ready'))
-	.catch((err: string) => console.error('Nest broken', err));
+	.then((app: INestApplication) => console.log('[Cloud Functions] Nest Ready'))
+	.catch((err: string) => console.error('[Cloud Functions][ERROR] Nest broken', err));
 
-export const writeApi = functions.https.onRequest(server);
+export const api: TriggerAnnotated & ((req: e.Request, resp: e.Response) => void) = functions.https.onRequest(server);
