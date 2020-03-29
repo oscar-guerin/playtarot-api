@@ -7,7 +7,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import express from 'express';
 import e, { Express } from 'express';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 
 const params: any = {
 	type: serviceAccount.type,
@@ -34,6 +34,7 @@ const createNestServer: (expressInstance: Express) => Promise<INestApplication> 
 		new ExpressAdapter(expressInstance),
 		{cors: true}
 	);
+	app.useGlobalPipes(new ValidationPipe());
 
 	return app.init();
 };

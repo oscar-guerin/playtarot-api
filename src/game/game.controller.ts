@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { GameService } from './game.service';
-import { Game } from './interfaces/game.interface';
+import { CreateGameDto } from './dto/create-game.dto';
 
 @Controller('game')
 export class GameController {
@@ -9,7 +9,7 @@ export class GameController {
 	}
 
 	@Post()
-	public async create(@Body() game: Game): Promise<void> {
+	public async create(@Body() game: CreateGameDto): Promise<void> {
 		await this.gameService.save(game);
 	}
 }
