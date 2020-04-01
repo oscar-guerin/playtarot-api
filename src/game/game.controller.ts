@@ -10,6 +10,6 @@ export class GameController {
 
 	@Post()
 	public async create(@Body() game: CreateGameDto): Promise<void> {
-		await this.gameService.save(game);
+		await this.gameService.create(game);
 	}
 }

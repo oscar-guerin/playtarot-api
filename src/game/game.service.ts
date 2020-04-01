@@ -8,7 +8,7 @@ export class GameService {
 	public constructor(private readonly gameRepository: GameRepository) {
 	}
 
-	public async save(game: Game): Promise<void> {
-		return this.gameRepository.save(game);
+	public async create(game: Game): Promise<void> {
+		return this.gameRepository.push(game);
 	}
 }
