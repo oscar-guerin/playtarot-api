@@ -4,7 +4,7 @@ import * as functions from 'firebase-functions';
 import { TriggerAnnotated } from 'firebase-functions';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { AppModule } from './app.module';
+import { AppModule } from './api/app.module';
 import express from 'express';
 import e, { Express } from 'express';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
