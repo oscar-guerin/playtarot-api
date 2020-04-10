@@ -8,6 +8,7 @@ import { AppModule } from './api/app.module';
 import express from 'express';
 import e, { Express } from 'express';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { AuthGuard } from './api/@auth/auth.guard';
 
 const params: any = {
 	type: serviceAccount.type,
@@ -35,6 +36,7 @@ const createNestServer: (expressInstance: Express) => Promise<INestApplication> 
 		{cors: true}
 	);
 	app.useGlobalPipes(new ValidationPipe());
+	app.useGlobalGuards(new AuthGuard());
 
 	return app.init();
 };

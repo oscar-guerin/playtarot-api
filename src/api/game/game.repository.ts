@@ -19,7 +19,7 @@ export class GameRepository extends FirestoreRepository {
 		);
 	}
 
-	public async update(id: string, data: Game): Promise<void> {
-		await this.client.collection(this.path).doc(id).set(data, {merge: true});
+	public async update(id: string, data: Game): Promise<void> { // TODO move data parsing
+		await this.client.collection(this.path).doc(id).set(JSON.parse(JSON.stringify(data)), {merge: true});
 	}
 }
